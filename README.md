@@ -1,4 +1,7 @@
 # go-mcrypt
+
+[![Build Status](https://travis-ci.org/mfpierre/go-mcrypt.svg?branch=master)](https://travis-ci.org/mfpierre/go-mcrypt)
+
 Go bindings for mcrypt library.
 
 Should be compatible with all algo/modes supported by libmcrypt
