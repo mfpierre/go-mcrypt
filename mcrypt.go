@@ -164,6 +164,7 @@ char* decrypt(void* key, int keyLength, void* iv, int ivLength, char* data, int*
 import "C"
 
 import (
+	"bytes"
 	"errors"
 	"unsafe"
 )
@@ -218,6 +219,9 @@ func decrypt(key []byte, iv []byte, data []byte, algo string, mode string) ([]by
 		return nil, errors.New(C.GoString(C.getError(err)))
 	}
 
-	// return the Go bytes of the decrypted data
-	return C.GoBytes(unsafe.Pointer(decryptedData), length), nil
+	decryptedBytes := C.GoBytes(unsafe.Pointer(decryptedData), length)
+	// trim ending null bytes
+	decryptedBytes = bytes.Trim(decryptedBytes, "\x00")
+
+	return decryptedBytes, nil
 }

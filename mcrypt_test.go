@@ -1,7 +1,9 @@
 package mcrypt
 
-import "testing"
-import "reflect"
+import (
+	"reflect"
+	"testing"
+)
 
 type encryptionTest struct {
 	algo      string
@@ -19,7 +21,7 @@ var tests = []encryptionTest{
 
 func TestEncrypt(t *testing.T) {
 	for _, pair := range tests {
-		key := []byte(pair.key) // 32 bytes
+		key := []byte(pair.key)
 		plaintext := []byte(pair.plaintext)
 		iv := make([]byte, pair.ivSize)
 
@@ -28,6 +30,23 @@ func TestEncrypt(t *testing.T) {
 			t.Error(
 				"For", pair.plaintext,
 				"expected", pair.encrypted,
+				"got", s,
+			)
+		}
+	}
+}
+
+func TestDecrypt(t *testing.T) {
+	for _, pair := range tests {
+		key := []byte(pair.key)
+		iv := make([]byte, pair.ivSize)
+
+		s, _ := decrypt(key, iv, pair.encrypted, pair.algo, pair.mode)
+		bytesPlaintext := []byte(pair.plaintext)
+		if !reflect.DeepEqual(s, bytesPlaintext) {
+			t.Error(
+				"For", pair.encrypted,
+				"expected", bytesPlaintext,
 				"got", s,
 			)
 		}
