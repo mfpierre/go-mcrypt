@@ -4,19 +4,20 @@
 
 Go bindings for mcrypt library.
 
-Should be compatible with most algo/modes supported by libmcrypt
+Should be compatible with most algo/modes supported by libmcrypt.
 
 ## Requirements
  * libmcrypt (http://mcrypt.sourceforge.net/)
 
 ## Usage
 ```go
-key := []byte("here is a random key of 32 bytes") // 32 bytes
-plaintext := []byte("here is what I want to encrypt")
+key := []byte("here is a random key of 32 bytes")
+plaintext := []byte("here is what you want to encrypt")
 iv := make([]byte, 16)
 
-// using cast-256 in ECB mode
+// using CAST-256 in ECB mode
 encrypted, _ := encrypt(key, iv, plaintext, "cast-256", "ecb")
+decrypted, _ := decrypt(key, iv, encrypted, "cast-256", "ecb")
 ```
 
 Below a reminder of IV & Key size that you can use depending on algo/mode settings
