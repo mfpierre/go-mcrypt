@@ -169,7 +169,7 @@ import (
 	"unsafe"
 )
 
-func encrypt(key []byte, iv []byte, data []byte, algo string, mode string) ([]byte, error) {
+func Encrypt(key []byte, iv []byte, data []byte, algo string, mode string) ([]byte, error) {
 	// keep track of the size of the input data
 	length := C.int(len(data))
 	if length == 0 {
@@ -196,7 +196,7 @@ func encrypt(key []byte, iv []byte, data []byte, algo string, mode string) ([]by
 	return C.GoBytes(unsafe.Pointer(encryptedData), length), nil
 }
 
-func decrypt(key []byte, iv []byte, data []byte, algo string, mode string) ([]byte, error) {
+func Decrypt(key []byte, iv []byte, data []byte, algo string, mode string) ([]byte, error) {
 	// keep track of the size of the input data
 	length := C.int(len(data))
 	if length == 0 {

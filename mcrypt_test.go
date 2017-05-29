@@ -25,7 +25,7 @@ func TestEncrypt(t *testing.T) {
 		plaintext := []byte(pair.plaintext)
 		iv := make([]byte, pair.ivSize)
 
-		s, _ := encrypt(key, iv, plaintext, pair.algo, pair.mode)
+		s, _ := Encrypt(key, iv, plaintext, pair.algo, pair.mode)
 		if !reflect.DeepEqual(s, pair.encrypted) {
 			t.Error(
 				"For", pair.plaintext,
@@ -41,7 +41,7 @@ func TestDecrypt(t *testing.T) {
 		key := []byte(pair.key)
 		iv := make([]byte, pair.ivSize)
 
-		s, _ := decrypt(key, iv, pair.encrypted, pair.algo, pair.mode)
+		s, _ := Decrypt(key, iv, pair.encrypted, pair.algo, pair.mode)
 		bytesPlaintext := []byte(pair.plaintext)
 		if !reflect.DeepEqual(s, bytesPlaintext) {
 			t.Error(
