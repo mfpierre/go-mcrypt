@@ -11,15 +11,24 @@ Should be compatible with most algo/modes supported by libmcrypt.
 
 ## Usage
 ```go
-import mcrypt "github.com/mfpierre/go-mcrypt"
+package main
 
-key := []byte("here is a random key of 32 bytes")
-plaintext := []byte("here is what you want to encrypt")
-iv := make([]byte, 16)
+import (
+	"fmt"
+	mcrypt "github.com/mfpierre/go-mcrypt"
+)
 
-// using CAST-256 in ECB mode
-encrypted, _ := mcrypt.Encrypt(key, iv, plaintext, "cast-256", "ecb")
-decrypted, _ := mcrypt.Decrypt(key, iv, encrypted, "cast-256", "ecb")
+func main() {
+	key := []byte("here is a random key of 32 bytes")
+	plaintext := []byte("here is what you want to encrypt")
+	iv := make([]byte, 16)
+
+	// using CAST-256 in ECB mode
+	encrypted, _ := mcrypt.Encrypt(key, iv, plaintext, "cast-256", "ecb")
+	decrypted, _ := mcrypt.Decrypt(key, iv, encrypted, "cast-256", "ecb")
+	fmt.Println(encrypted)
+	fmt.Println(decrypted)
+}
 ```
 
 Below a reminder of IV & Key size that you can use depending on algo/mode settings
